@@ -1,29 +1,29 @@
 
-//hinge();
+// hinge
+$nf = 20;
+$fs = 0.1;
+$fa = 1;
 
 width = 120;
 outer_radius = 5;
-shaft_radius = outer_radius / 2;
-shaft_length = width;
+pin_radius = outer_radius / 2;
+pin_length = width / 2 * 0.9;
 leaf_length = width / 2;
 
-receiver_radius_delta = 1.1;
-receiver_radius = outer_radius / 2 * receiver_radius_delta;
+receiver_radius = outer_radius / 2;
 receiver_length = width / 2;
 
 male();
-translate([15, 0, 120/2])
-    female();
+%female();
 
 module male() {
-    cylinder(r=shaft_radius, h=shaft_length * 0.8, center=false);
     cylinder(r=outer_radius, h=leaf_length, center=false);
+    translate([0, 0, leaf_length]) cylinder(r=pin_radius, h=pin_length, center=false);
 }
 
 module female() {
-    d = 0.95;
-    difference() {
+    translate([0,0,receiver_length]) difference() {
         cylinder(r=outer_radius, h=receiver_length, center=false);
-        cylinder(r=receiver_radius, h=receiver_length, center=false);
+        cylinder(r=receiver_radius, h=pin_length, center=false);
     }
 }
