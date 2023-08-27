@@ -1,17 +1,17 @@
 
 // hinge
+
 $nf = 20;
 $fs = 0.1;
 $fa = 1;
 
-width = 120;
+total_width = 120;
 outer_radius = 5;
 pin_radius = outer_radius / 2;
-pin_length = width / 2 * 0.9;
-leaf_length = width / 2;
-
+pin_length = total_width / 2 * 0.9;
+leaf_length = total_width / 2;
 receiver_radius = outer_radius / 2;
-receiver_length = width / 2;
+receiver_length = total_width / 2;
 
 male();
 *female();
@@ -20,8 +20,8 @@ module male() {
     cylinder(r=outer_radius, h=leaf_length, center=false);
     translate([0, 0, leaf_length]) cylinder(r=pin_radius, h=pin_length, center=false);
 
-    catch_resess = width * 0.1;
-    translate([0,0,width - catch_resess]) catch();
+    catch_recess = total_width * 0.1;
+    translate([0,0,total_width - catch_recess]) catch();
 }
 
 module female() {
