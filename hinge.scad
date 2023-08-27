@@ -20,7 +20,8 @@ module male() {
     cylinder(r=outer_radius, h=leaf_length, center=false);
     translate([0, 0, leaf_length]) cylinder(r=pin_radius, h=pin_length, center=false);
 
-    catch_resess = pin_length * 0.9;
+    catch_resess = width * 0.1;
+    translate([0,0,width - catch_resess]) catch();
 }
 
 module female() {
@@ -30,10 +31,12 @@ module female() {
     }
 }
 
-module tictac() {
+module catch() {
     radius = receiver_radius * 0.5;
-    hull() {
-        translate([0,0,radius])    sphere(radius);
-        translate([0,0,-radius])    sphere(radius);
+    for (i = [0:90:360]) {
+        rotate(a=i, v=[0,0,1]) translate([receiver_radius, 0, 0]) hull() {
+            translate([0,0,radius])    sphere(radius);
+            translate([0,0,-radius])    sphere(radius);
+        }
     }
 }
