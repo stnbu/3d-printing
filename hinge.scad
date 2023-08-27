@@ -16,32 +16,51 @@ female_hemicap = false;
 catch_setback = total_length * 0.15;
 
 male();
-translate([outer_radius * 2.2, 0, leaf_length]) female();
+translate([outer_radius * 2 + 1, 0]) female();
 
 module male() {
-    cylinder(r=outer_radius, h=leaf_length, center=false);
-    if (male_hemicap) {
-        sphere(outer_radius);
+    union() difference() {
+        uncut();
+        plus_cuts();
     }
-    translate([0, 0, leaf_length])
-        cylinder(r=pin_radius, h=pin_length, center=false);
-    translate([0, 0, leaf_length + pin_length])
-        sphere(pin_radius);
-    translate([0,0,total_length - catch_setback])
-        catch();
+
+    module uncut() {
+        cylinder(r=outer_radius, h=leaf_length, center=false);
+        if (male_hemicap) {
+            sphere(outer_radius);
+        }
+        translate([0, 0, leaf_length])
+            cylinder(r=pin_radius, h=pin_length, center=false);
+        translate([0, 0, leaf_length + pin_length])
+            sphere(pin_radius);
+        translate([0,0,total_length - catch_setback])
+            catch();
+    }
+
+    module plus_cuts() {
+        cut_depth = 5;
+        rotate(a = 45, v = [0,0,1]) {
+            translate([0,0, (total_length - catch_setback) * 1.01]) {
+                cube([pin_radius * 0.3, pin_radius * cut_depth, pin_radius* cut_depth], center=true);
+                cube([pin_radius * cut_depth, pin_radius * 0.3,  pin_radius* cut_depth], center=true);
+            }
+        }
+    }
 }
 
 module female() {
-    difference() {
+    union() {
         difference() {
-            cylinder(r=outer_radius, h=receiver_length, center=false);
-            cylinder(r=receiver_radius, h=receiver_length + receiver_radius, center=false);
+            difference() {
+                cylinder(r=outer_radius, h=receiver_length, center=false);
+                cylinder(r=receiver_radius, h=receiver_length + receiver_radius, center=false);
+            }
+            translate([0, 0, receiver_length - catch_setback]) catch_ring();
         }
-        translate([0, 0, receiver_length - catch_setback]) catch_ring();
-    }
-    if (female_hemicap) {
-        translate([0, 0, receiver_length])
-            sphere(outer_radius);
+        if (female_hemicap) {
+            translate([0, 0, receiver_length])
+                sphere(outer_radius);
+        }
     }
 }
 
