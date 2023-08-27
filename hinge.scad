@@ -35,7 +35,7 @@ module female() {
     difference() {
         difference() {
             cylinder(r=outer_radius, h=receiver_length, center=false);
-            cylinder(r=receiver_radius, h=pin_length*1.1, center=false);
+            cylinder(r=receiver_radius, h=receiver_length + receiver_radius, center=false);
         }
         translate([0, 0, receiver_length - catch_setback]) catch_ring();
     }
