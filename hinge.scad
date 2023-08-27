@@ -44,9 +44,9 @@ module female() {
 }
 
 module catch() {
-    radius = receiver_radius * 0.5;
+    radius = pin_radius * 0.5;
     for (i = [0:90:360]) {
-        rotate(a=i, v=[0, 0, 1]) translate([receiver_radius, 0, 0]) hull() {
+        rotate(a=i, v=[0, 0, 1]) translate([pin_radius, 0, 0]) hull() {
             translate([0, 0, radius]) sphere(radius);
             translate([0, 0, -radius]) sphere(radius);
         }
