@@ -13,9 +13,10 @@ receiver_radius = outer_radius / 2;
 receiver_length = total_width / 2;
 male_hemicap = true;
 female_hemicap = true;
+catch_recess = total_width * 0.1;
 
 //male();
-//translate([outer_radius * 2.2, 0, 0]) female();
+translate([outer_radius * 2.2, 0, 0]) female();
 
 module male() {
     cylinder(r=outer_radius, h=leaf_length, center=false);
@@ -26,17 +27,18 @@ module male() {
         cylinder(r=pin_radius, h=pin_length, center=false);
     translate([0, 0, leaf_length + pin_length])
         sphere(pin_radius);
-
-    catch_recess = total_width * 0.1;
     translate([0,0,total_width - catch_recess])
         catch();
 }
 
 module female() {
-    difference() {
-        cylinder(r=outer_radius, h=receiver_length, center=false);
-        cylinder(r=receiver_radius, h=pin_length, center=false);
+    {
+        difference() {
+            cylinder(r=outer_radius, h=receiver_length, center=false);
+            cylinder(r=receiver_radius, h=pin_length, center=false);
+        }
     }
+    translate([outer_radius,0,receiver_length]) catch_ring();
     if (female_hemicap) {
         translate([0, 0, receiver_length])
             sphere(outer_radius);
@@ -51,15 +53,16 @@ module catch() {
     }
 }
 
-// .......
-rotate_extrude(angle = 360) {
-    translate([receiver_radius,0,0]) hull() {
-        translate([0,receiver_radius,0]) circle(receiver_radius);
-        translate([0,-receiver_radius,0]) circle(receiver_radius);
-    }
-}
 module catch_ring() {
-    translate([receiver_radius,0,0]) tictac(receiver_radius);
+    $nf = 5;
+    $fs = 0.5;
+    $fa = 10;
+    rotate_extrude(angle = 360) {
+        translate([receiver_radius,0,0]) hull() {
+            translate([0,receiver_radius,0]) circle(receiver_radius);
+            translate([0,-receiver_radius,0]) circle(receiver_radius);
+        }
+    }
 }
 
 module tictac(r) {
