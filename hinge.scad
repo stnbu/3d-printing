@@ -4,7 +4,7 @@ $nf = 20;
 $fs = 0.1;
 $fa = 1;
 
-total_length = 120;
+total_length = 120/3;
 outer_radius = 5;
 pin_radius = outer_radius / 2;
 pin_length = total_length / 2 * 0.9 - pin_radius;
