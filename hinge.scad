@@ -9,14 +9,14 @@ outer_radius = 5;
 pin_radius = outer_radius / 2;
 pin_length = total_length / 2 * 0.9 - pin_radius;
 leaf_length = total_length / 2;
-receiver_radius = outer_radius / 2;
+receiver_radius = outer_radius / 2 * 1.1;
 receiver_length = total_length / 2;
-male_hemicap = true;
-female_hemicap = true;
-catch_setback = total_length * 0.1;
+male_hemicap = false;
+female_hemicap = false;
+catch_setback = total_length * 0.15;
 
 male();
-translate([outer_radius * 2.2, 0, 0]) female();
+translate([outer_radius * 2.2, 0, leaf_length]) female();
 
 module male() {
     cylinder(r=outer_radius, h=leaf_length, center=false);
@@ -35,9 +35,9 @@ module female() {
     difference() {
         difference() {
             cylinder(r=outer_radius, h=receiver_length, center=false);
-            cylinder(r=receiver_radius, h=pin_length, center=false);
+            cylinder(r=receiver_radius, h=pin_length*1.1, center=false);
         }
-        translate([0,0,receiver_length - catch_setback]) catch_ring();
+        translate([0, 0, receiver_length - catch_setback]) catch_ring();
     }
     if (female_hemicap) {
         translate([0, 0, receiver_length])
@@ -60,8 +60,8 @@ module catch_ring() {
     radius = receiver_radius * 0.4;
     rotate_extrude(angle = 360) {
         translate([receiver_radius,0,0]) hull() {
-            translate([0,radius,0]) circle(radius);
-            translate([0,-radius,0]) circle(radius);
+            translate([0, radius, 0]) circle(radius);
+            translate([0, -radius, 0]) circle(radius);
         }
     }
 }
