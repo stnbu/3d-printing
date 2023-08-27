@@ -12,12 +12,15 @@ pin_length = total_width / 2 * 0.9;
 leaf_length = total_width / 2;
 receiver_radius = outer_radius / 2;
 receiver_length = total_width / 2;
+male_hemicap = true;
+female_hemicap = true;
 
 male();
-*female();
+%female();
 
 module male() {
     cylinder(r=outer_radius, h=leaf_length, center=false);
+    if (male_hemicap) { sphere(outer_radius); }
     translate([0, 0, leaf_length]) cylinder(r=pin_radius, h=pin_length, center=false);
 
     catch_recess = total_width * 0.1;
@@ -29,6 +32,7 @@ module female() {
         cylinder(r=outer_radius, h=receiver_length, center=false);
         cylinder(r=receiver_radius, h=pin_length, center=false);
     }
+    if (female_hemicap) { translate([0,0,total_width]) sphere(outer_radius); }
 }
 
 module catch() {
