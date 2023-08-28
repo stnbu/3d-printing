@@ -32,10 +32,11 @@ module female() {
     receiver_radius = pin_radius * 1.1;
     receiver_thickness = outer_radius - receiver_radius;
     channel_radius = nub_radius * 1.1;
+    channel_backoff = channel_radius / 2;
     rotate_extrude() difference() {
         translate([receiver_radius, 0, 0])
             square([receiver_thickness, pin_length]);
-        translate([receiver_radius, pin_length - channel_radius])
+        translate([receiver_radius, pin_length - channel_radius - channel_backoff])
             circle(channel_radius, $fs=channel_radius * 0.06);
     }
 }
