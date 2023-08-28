@@ -1,5 +1,6 @@
 pin_length = 20;
 outer_radius = 5;
+echo("####>PART diameter: ", outer_radius * 2);
 
 unit = pin_length / 50;
 pin_radius = outer_radius / 2;
@@ -38,7 +39,7 @@ module female() {
     keyway_size = nub_radius * 1.2 * 1.3;
     keyway_backoff = keyway_size / 2;
     echo("####>receiver diameter: ", receiver_radius * 2);
-    echo("####>receiver wall: ", receiver_radius * 2);
+    echo("####>receiver wall: ", receiver_wall_thickness);
     echo("####>receiver outer diameter: ", receiver_radius * 2 + receiver_wall_thickness * 2);
     echo("####>keyway diameter: ", receiver_radius * 2 + keyway_size * 2);
     rotate_extrude() difference() {
