@@ -34,7 +34,6 @@ module with_handle() union() {
 }
 
 module handle_cutter() rotate([-swing_angle, 0, 0]) {
-    ///
     translate([0, 0, -handle_radius / 2])
         cube([handle_width * 1.1, handle_radius * 5, handle_radius], center = true);
 }
