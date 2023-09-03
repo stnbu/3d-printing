@@ -14,6 +14,9 @@ handle_width = 90;
 height = 230;
 foot_width = 115;
 
+hull() for (n = [1, -1]) {
+    translate([n * handle_width * 0.2, 0, 0]) circle(handle_width / 6);
+}
 for (n = [1, -1]) {
     polygon([
         [0, 0],
@@ -21,4 +24,4 @@ for (n = [1, -1]) {
         [n * foot_width / 2, height],
         [0, height],
     ]);
-}
+ }
