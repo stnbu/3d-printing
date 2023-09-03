@@ -17,7 +17,13 @@ foot_width = 23 * s;
 
 handle_radius = s * 1.1;
 
-difference() {
+swing_angle = 15;
+
+rotate([swing_angle, 0, 0]) side();
+rotate([-swing_angle, 0, 0]) mirror([0, 0, 1]) side();
+
+
+module side() difference() {
     with_handle();
     handle_cutter();
 }
@@ -30,7 +36,7 @@ module with_handle() union() {
     rotate([0, 90, 0]) cylinder(h = handle_width, r = handle_radius, center = true);
 }
 
-module handle_cutter() rotate([-22, 0, 0]) {
+module handle_cutter() rotate([-swing_angle, 0, 0]) {
     translate([0, 0, -handle_radius / 2])
         cube([handle_width * 1.1, handle_radius * 5, handle_radius], center = true);
 }
