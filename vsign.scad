@@ -10,18 +10,26 @@ The edges of the `side`s, `handle_opening`, and `void` between the feet have a s
 Collectively, anything that makes a hole in the `side` are `holes`, which are a `union()` so they can be `difference()`'ed from the `side`.
 */
 
-handle_width = 90;
-height = 230;
-foot_width = 115;
+s = 5;
+handle_width = 18 * s;
+height = 46 * s;
+foot_width = 23 * s;
 
-hull() for (n = [1, -1]) {
-    translate([n * handle_width * 0.2, 0, 0]) circle(handle_width / 6);
+difference() {
+    for (n = [1, -1]) {
+        polygon([
+            [0, 0],
+            [n * handle_width / 2, 0],
+            [n * foot_width / 2, height],
+            [0, height],
+        ]);
+    }
+    union() {
+        hull() for (n = [1, -1]) {
+            translate([n * s * 3.1, 0, 0]) circle(s * 3);
+        }
+        hull() for (n = [1, -1]) {
+            translate([n * s * 4.3, height, 0]) circle(s * 3);
+        }
+    }
 }
-for (n = [1, -1]) {
-    polygon([
-        [0, 0],
-        [n * handle_width / 2, 0],
-        [n * foot_width / 2, height],
-        [0, height],
-    ]);
- }
