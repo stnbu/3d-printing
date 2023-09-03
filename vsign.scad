@@ -15,7 +15,14 @@ handle_width = 18 * s;
 height = 46 * s;
 foot_width = 23 * s;
 
-difference() {
+linear_extrude(height = s, center = true) difference() {
+    blank();
+    holes();
+}
+
+rotate([0, 90, 0]) cylinder(h = handle_width, r = s * 1.1, center = true);
+
+module blank() {
     for (n = [1, -1]) {
         polygon([
             [0, 0],
@@ -24,6 +31,9 @@ difference() {
             [0, height],
         ]);
     }
+}
+
+module holes() difference() {
     union() {
         hull() for (n = [1, -1]) {
             translate([n * s * 3.1, 0, 0]) circle(s * 3);
