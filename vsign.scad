@@ -15,12 +15,22 @@ handle_width = 18 * s;
 height = 46 * s;
 foot_width = 23 * s;
 
-linear_extrude(height = s, center = true) difference() {
-    blank();
-    holes();
+handle_radius = s * 1.1;
+
+difference() {
+union() {
+    linear_extrude(height = s, center = true) difference() {
+        blank();
+        holes();
+    }
+    rotate([0, 90, 0]) cylinder(h = handle_width, r = handle_radius, center = true);
 }
 
-rotate([0, 90, 0]) cylinder(h = handle_width, r = s * 1.1, center = true);
+rotate([-22, 0, 0]) {
+    translate([0, 0, -handle_radius / 2])
+        cube([handle_width * 1.1, handle_radius * 5, handle_radius], center = true);
+}
+}
 
 module blank() {
     for (n = [1, -1]) {
