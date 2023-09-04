@@ -10,15 +10,17 @@ The edges of the `side`s, `handle_opening`, and `void` between the feet have a s
 Collectively, anything that makes a hole in the `side` are `holes`, which are a `union()` so they can be `difference()`'ed from the `side`.
 */
 
-handle_width = 90;
-height = 230;
-foot_width = 115;
-handle_radius = 5.5;
+ $fs = 0.1;
+ $fa = 1;
+
+handle_width = 90 * 0.439;
+height = 230 * 0.439;
+foot_width = 115 * 0.439;
+handle_radius = 5.5 * 0.439;
 swing_angle = 15; // per half
 
-rotate([swing_angle, 0, 0]) side();
-rotate([-swing_angle, 0, 0]) mirror([0, 0, 1]) side();
-
+translate([28, 0, 0]) side();
+translate([-28, 0, 0]) side();
 
 module side() difference() {
     with_handle();
@@ -26,7 +28,7 @@ module side() difference() {
 }
 
 module with_handle() union() {
-    linear_extrude(height = 5, center = true) difference() {
+    linear_extrude(height = 1.2, center = true) difference() {
         blank();
         holes();
     }
@@ -52,10 +54,10 @@ module blank() {
 module holes() difference() {
     union() {
         hull() for (n = [1, -1]) {
-            translate([n * 15.5, 0, 0]) circle(15);
+            translate([n * 15.5 * 0.439, 0, 0]) circle(15 * 0.439);
         }
         hull() for (n = [1, -1]) {
-            translate([n * 21.5, height, 0]) circle(15);
+            translate([n * 21.5 * 0.439, height, 0]) circle(15 * 0.439);
         }
     }
 }
