@@ -13,10 +13,11 @@ Collectively, anything that makes a hole in the `side` are `holes`, which are a 
  $fs = 0.1;
  $fa = 1;
 
-handle_width = 90 * 0.439 + (6.8045 * 2);
+handle_width = 13.3895 * 2;
 height = 230 * 0.439;
-foot_width = 115 * 0.439;
-handle_radius = 5.5 * 0.439;
+foot_width = 16.0235 * 2;
+handle_height = 6.585;
+food_height = 6.585;
 swing_angle = 15; // per half
 
 /*
@@ -62,9 +63,14 @@ module half() {
     ]);
 }
 
-// quarter_rounded_half_slot(handle_width / 2, 6.8045);
+holes();
 
-quarter_rounded_half_slot(30, 6);
+module holes() {
+    union() {
+        quarter_rounded_half_slot(handle_width / 2, handle_height);
+        translate([0, height, 0]) quarter_rounded_half_slot(foot_width / 2, food_height);
+    }
+}
 
 module quarter_rounded_half_slot(width, height) {
     difference() {
