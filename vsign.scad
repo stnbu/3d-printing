@@ -67,7 +67,7 @@ module half() {
 }
 
 module blank() {
-    difference() {
+    linear_extrude(height = 1.2, center = true) difference() {
         polygon([
             [0, 0],
             [handle_width / 2, 0],
