@@ -61,6 +61,7 @@ module blank() {
 // half();
 
 half();
+mirror([1, 0, 0]) half();
 
 module half() {
     difference() {
