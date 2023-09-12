@@ -78,17 +78,14 @@ module half() {
 module holes() {
     union() {
         quarter_rounded_half_slot(handle_hole_width / 2, handle_hole_height);
-        translate([0, height, 0]) mirror([0, 1, 0]) quarter_rounded_half_slot(
-            void_width / 2, void_height);
+        translate([0, height, 0]) mirror([0, 1, 0])
+            quarter_rounded_half_slot(void_width / 2, void_height);
     }
 }
 
 module quarter_rounded_half_slot(width, height) {
-    difference() {
-        union() {
-            square([width - height, height]);
-            translate([width - height, 0, 0]) circle(height);
-        }
-        translate([0, -height, 0]) square([width, height]);
+    union() {
+        square([width - height, height]);
+        translate([width - height, 0, 0]) circle(height);
     }
 }
