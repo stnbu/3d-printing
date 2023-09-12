@@ -19,8 +19,7 @@ foot_width = 115 * 0.439;
 handle_radius = 5.5 * 0.439;
 swing_angle = 15; // per half
 
-translate([28, 0, 0]) side();
-translate([-28, 0, 0]) side();
+side();
 
 module side() difference() {
     with_handle();
@@ -41,14 +40,20 @@ module handle_cutter() rotate([-swing_angle, 0, 0]) {
 }
 
 module blank() {
-    for (n = [1, -1]) {
-        polygon([
-            [0, 0],
-            [n * handle_width / 2, 0],
-            [n * foot_width / 2, height],
-            [0, height],
-        ]);
+    union() {
+        half();
+        mirror([1, 0, 0]) half();
     }
+}
+
+module half() {
+    polygon([
+        [0, 0],
+        [handle_width / 2, 0],
+        [foot_width / 2, height],
+        [0, height],
+        [0, 0],
+    ]);
 }
 
 module holes() difference() {
