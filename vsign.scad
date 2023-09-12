@@ -19,6 +19,8 @@ foot_width = 115 * 0.439;
 handle_radius = 5.5 * 0.439;
 swing_angle = 15; // per half
 
+/*
+
 side();
 
 module side() difference() {
@@ -45,6 +47,10 @@ module blank() {
         mirror([1, 0, 0]) half();
     }
 }
+
+*/
+
+half();
 
 module half() {
     polygon([
