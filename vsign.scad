@@ -13,11 +13,18 @@ Collectively, anything that makes a hole in the `side` are `holes`, which are a 
  $fs = 0.1;
  $fa = 1;
 
-handle_width = 13.3895 * 2;
+
+handle_width = 90 * 0.439 + (6.8045 * 2);
+foot_width = 115 * 0.439;
+handle_radius = 5.5 * 0.439;
+
 height = 230 * 0.439;
-foot_width = 16.0235 * 2;
-handle_height = 6.585;
-food_height = 6.585;
+
+handle_hole_width = (15.5 * 0.439 + 6.585) * 2;
+handle_hole_height = 6.585;
+void_width = (21.5 * 0.439 + 6.585) * 2;
+void_height = 6.585;
+
 swing_angle = 15; // per half
 
 /*
@@ -53,22 +60,26 @@ module blank() {
 
 // half();
 
-module half() {
-    polygon([
-        [0, 0],
-        [handle_width / 2, 0],
-        [foot_width / 2, height],
-        [0, height],
-        [0, 0],
-    ]);
-}
+half();
 
-holes();
+module half() {
+    difference() {
+        polygon([
+            [0, 0],
+            [handle_width / 2, 0],
+            [foot_width / 2, height],
+            [0, height],
+            [0, 0],
+        ]);
+        holes();
+    }
+}
 
 module holes() {
     union() {
-        quarter_rounded_half_slot(handle_width / 2, handle_height);
-        translate([0, height, 0]) quarter_rounded_half_slot(foot_width / 2, food_height);
+        quarter_rounded_half_slot(handle_hole_width / 2, handle_hole_height);
+        translate([0, height, 0]) mirror([0, 1, 0]) quarter_rounded_half_slot(
+            void_width / 2, void_height);
     }
 }
 
