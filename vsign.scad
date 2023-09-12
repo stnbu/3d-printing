@@ -25,7 +25,7 @@ handle_hole_height = 6.585;
 void_width = (21.5 * 0.439 + 6.585) * 2;
 void_height = 6.585;
 
-swing_angle = 15; // per half
+swing_angle = 15;
 
 /*
 
@@ -63,6 +63,10 @@ module blank() {
 half();
 
 module half() {
+    blank();
+}
+
+module blank() {
     difference() {
         polygon([
             [0, 0],
