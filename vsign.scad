@@ -63,7 +63,22 @@ module blank() {
 half();
 
 module half() {
-    blank();
+    difference() {
+        union() {
+            blank();
+            half_handle();
+        }
+        handle_cutter();
+    }
+}
+
+module half_handle() {
+    rotate([0, 90, 0]) cylinder(h = handle_width / 2, r = handle_radius);
+}
+
+module handle_cutter() rotate([-swing_angle, 0, 0]) {
+    translate([0, 0, -handle_radius / 2])
+        cube([handle_width * 1.1 / 2, handle_radius * 5, handle_radius]);
 }
 
 module blank() {
