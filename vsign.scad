@@ -10,17 +10,17 @@ The edges of the `side`s, `handle_opening`, and `void` between the feet have a s
 Collectively, anything that makes a hole in the `side` are `holes`, which are a `union()` so they can be `difference()`'ed from the `side`.
 */
 
- $fs = 0.1;
- $fa = 1;
+$fs = 0.4;
+$fa = 4;
 
 // Total height
 height = 101;
 // Width at the top: the handle's width
 handle_width = 35;
-handle_radius = 2.4145 * 2;
+handle_radius = 4.5;
 // The hole for the handle at the top
 handle_hole_width = 23;
-handle_hole_height = 6.585 * 1.5;
+handle_hole_height = 10;
 // The width at the bottom
 foot_width = 48;
 // The hole between the feet at the bottom
@@ -32,7 +32,7 @@ swing_angle = 15;
 sign();
 
 module sign() {
-    separation = foot_width * 0.9;
+    separation = foot_width;
     translate([separation / 2, 0, 0]) side();
     translate([-separation / 2, 0, 0]) rotate([0, 0, 180]) side();
 }
@@ -59,10 +59,11 @@ module half() {
 
 module half_handle() {
     rotate([0, 90, 0]) cylinder(h = handle_width / 2, r = handle_radius);
+    translate([handle_width / 2, 0, 0]) sphere(handle_radius);
 }
 
 module vertical_cut() {
-    width = handle_width * 1.1 / 2;
+    width = handle_width;
     height = handle_radius * 6;
     thickness = handle_radius * 4 / 3;
     translate([handle_width / 4, 0, -thickness / 2]) rotate([-swing_angle, 0, 0]) cube([width, height, thickness], center=true);
