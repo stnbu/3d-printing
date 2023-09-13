@@ -13,17 +13,20 @@ Collectively, anything that makes a hole in the `side` are `holes`, which are a 
  $fs = 0.1;
  $fa = 1;
 
-handle_width = 45;
-foot_width = 57.5;
-handle_radius = 2.4145;
-
+// Total height
 height = 101;
-
+// Width at the top: the handle's width
+handle_width = 45;
+handle_radius = 2.4145;
+// The hole for the handle at the top
 handle_hole_width = 26.779;
 handle_hole_height = 6.585;
+// The width at the bottom
+foot_width = 57.5;
+// The hole between the feet at the bottom
 void_width = 32.047;
 void_height = 6.585;
-
+// The angle (deg) a side is swung outwards, from the vertical
 swing_angle = 15;
 
 side();
