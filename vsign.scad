@@ -29,7 +29,13 @@ void_height = 6.585;
 // The angle (deg) a side is swung outwards, from the vertical
 swing_angle = 15;
 
-side();
+sign();
+
+module sign() {
+    separation = foot_width * 0.9;
+    translate([separation / 2, 0, 0]) side();
+    translate([-separation / 2, 0, 0]) rotate([0, 0, 180]) side();
+}
 
 module side() {
     translate([0, -height / 2, 0]) {
