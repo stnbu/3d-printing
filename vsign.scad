@@ -17,10 +17,10 @@ Collectively, anything that makes a hole in the `side` are `holes`, which are a 
 height = 101;
 // Width at the top: the handle's width
 handle_width = 45;
-handle_radius = 2.4145;
+handle_radius = 2.4145 * 2;
 // The hole for the handle at the top
 handle_hole_width = 26.779;
-handle_hole_height = 6.585;
+handle_hole_height = 6.585 * 1.5;
 // The width at the bottom
 foot_width = 57.5;
 // The hole between the feet at the bottom
@@ -42,7 +42,7 @@ module half() {
             blank();
             half_handle();
         }
-        handle_cutter();
+        vertical_cut();
     }
 }
 
@@ -50,7 +50,7 @@ module half_handle() {
     rotate([0, 90, 0]) cylinder(h = handle_width / 2, r = handle_radius);
 }
 
-module handle_cutter() {
+module vertical_cut() {
     width = handle_width * 1.1 / 2;
     height = handle_radius * 6;
     thickness = handle_radius * 4 / 3;
