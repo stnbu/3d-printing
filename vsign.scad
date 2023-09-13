@@ -16,13 +16,13 @@ Collectively, anything that makes a hole in the `side` are `holes`, which are a 
 // Total height
 height = 101;
 // Width at the top: the handle's width
-handle_width = 45;
+handle_width = 35;
 handle_radius = 2.4145 * 2;
 // The hole for the handle at the top
-handle_hole_width = 26.779;
+handle_hole_width = 23;
 handle_hole_height = 6.585 * 1.5;
 // The width at the bottom
-foot_width = 57.5;
+foot_width = 48;
 // The hole between the feet at the bottom
 void_width = 32.047;
 void_height = 6.585;
@@ -32,17 +32,22 @@ swing_angle = 15;
 side();
 
 module side() {
+    translate([0, -height / 2, 0]) {
     half();
     mirror([1, 0, 0]) half();
+    }
 }
 
 module half() {
     difference() {
-        union() {
-            blank();
-            half_handle();
+        difference() {
+            union() {
+                blank();
+                half_handle();
+            }
+            vertical_cut();
         }
-        vertical_cut();
+        side_back_cut();
     }
 }
 
@@ -57,8 +62,15 @@ module vertical_cut() {
     translate([handle_width / 4, 0, -thickness / 2]) rotate([-swing_angle, 0, 0]) cube([width, height, thickness], center=true);
 }
 
+module side_back_cut() {
+    width = foot_width * 1.5 / 2;
+    _height = height * 1.5;
+    thickness = 10; // "big"
+    translate([foot_width / 4, height / 2, -thickness / 2]) cube([width, _height, thickness], center=true);
+}
+
 module blank() {
-    linear_extrude(height = 1.2, center = true) difference() {
+    linear_extrude(height = 1, center = true) difference() {
         polygon([
             [0, 0],
             [handle_width / 2, 0],
