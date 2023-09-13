@@ -13,9 +13,8 @@ Collectively, anything that makes a hole in the `side` are `holes`, which are a 
  $fs = 0.1;
  $fa = 1;
 
-
-handle_width = 90 * 0.439 + (6.8045 * 2);
-foot_width = 115 * 0.439;
+handle_width = 45;
+foot_width = 57.5;
 handle_radius = 5.5 * 0.439;
 
 height = 230 * 0.439;
@@ -27,41 +26,12 @@ void_height = 6.585;
 
 swing_angle = 15;
 
-/*
-
 side();
 
-module side() difference() {
-    with_handle();
-    handle_cutter();
+module side() {
+    half();
+    mirror([1, 0, 0]) half();
 }
-
-module with_handle() union() {
-    linear_extrude(height = 1.2, center = true) difference() {
-        blank();
-        holes();
-    }
-    rotate([0, 90, 0]) cylinder(h = handle_width, r = handle_radius, center = true);
-}
-
-module handle_cutter() rotate([-swing_angle, 0, 0]) {
-    translate([0, 0, -handle_radius / 2])
-        cube([handle_width * 1.1, handle_radius * 5, handle_radius], center = true);
-}
-
-module blank() {
-    union() {
-        half();
-        mirror([1, 0, 0]) half();
-    }
-}
-
-*/
-
-// half();
-
-half();
-mirror([1, 0, 0]) half();
 
 module half() {
     difference() {
@@ -77,9 +47,11 @@ module half_handle() {
     rotate([0, 90, 0]) cylinder(h = handle_width / 2, r = handle_radius);
 }
 
-module handle_cutter() rotate([-swing_angle, 0, 0]) {
-    translate([0, 0, -handle_radius / 2])
-        cube([handle_width * 1.1 / 2, handle_radius * 5, handle_radius]);
+module handle_cutter() {
+    width = handle_width * 1.1 / 2;
+    height = handle_radius * 6;
+    thickness = handle_radius * 4 / 3;
+    translate([handle_width / 4, 0, -thickness / 2]) rotate([-swing_angle, 0, 0]) cube([width, height, thickness], center=true);
 }
 
 module blank() {
