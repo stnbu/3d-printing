@@ -15,13 +15,13 @@ Collectively, anything that makes a hole in the `side` are `holes`, which are a 
 
 handle_width = 45;
 foot_width = 57.5;
-handle_radius = 5.5 * 0.439;
+handle_radius = 2.4145;
 
-height = 230 * 0.439;
+height = 101;
 
-handle_hole_width = (15.5 * 0.439 + 6.585) * 2;
+handle_hole_width = 26.779;
 handle_hole_height = 6.585;
-void_width = (21.5 * 0.439 + 6.585) * 2;
+void_width = 32.047;
 void_height = 6.585;
 
 swing_angle = 15;
