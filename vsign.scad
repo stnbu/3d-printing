@@ -39,8 +39,8 @@ module sign() {
 
 module side() {
     translate([0, -height / 2, 0]) {
-    half();
-    mirror([1, 0, 0]) half();
+        half();
+        mirror([1, 0, 0]) half();
     }
 }
 
@@ -55,6 +55,10 @@ module half() {
         }
         side_back_cut();
     }
+    peg_radius = 1;
+    peg_length = 1.25;
+    peg_offset = handle_width / 3;
+    translate([peg_offset, 0, 0]) cylinder(r=peg_radius, h=peg_length*2, center=true);
 }
 
 module half_handle() {
