@@ -10,21 +10,25 @@ outer_diameter = outer_radius * 2;
 thickness = 6 * 2/3;
 groove = thickness / 2;
 
+// phi --> longitude angle
+// theta --> latitude angle
+
 difference() {
     hemisphere();
     maze();
 }
 
-// maze();
 module maze() {
-    arc([90, 0, 0]);
-    arc([90, 0, 90]);    
+    phi_arc(45);
 }
 
-module arc(a) {
-    rotate(a)
-    rotate_extrude(angle = 180)
-    translate ([outer_radius, 0, 0]) square([groove, groove], center = true);
+module phi_arc(theta) {
+    z = cos(theta) * outer_radius;
+    x = sin(theta) * outer_radius;;
+    translate([0, 0, z])
+        rotate_extrude(angle = 360)
+            translate ([x, 0, 0])
+                rotate(theta) square([groove, groove], center = true);
 }
 
 module hemisphere() {
